@@ -19,9 +19,21 @@ lambda-query invokes lambda function with given query and get response and displ
 
 ## Installation
 
+Install client
+
 ```bash
 $ go get -u github.com/shufo/lambda-query
 ```
+
+Upload lambda function to your Lambda
+
+```bash
+$ cd lambda_function
+$ pip install -r requirements.txt -t .
+$ zip -r lambda_function.zip *
+```
+
+see terraform resource [example](./example/main.tf) for deployment example.
 
 ## Usage
 
@@ -33,7 +45,6 @@ $ lambda-query -f lambda_query -q "select * from users" --format table
 | 1  | foo  | bar@example.com     |                   | pass     |                |            |            |
 | 5  | foo  | bartest@example.com |                   |          |                |            |            |
 +----+------+---------------------+-------------------+----------+----------------+------------+------------+
-
 ```
 
 ## Options
