@@ -69,6 +69,11 @@ $ lambda-query -f function_name \
   --limit 10000 \
   --format csv
   --output result.csv
+
+$ cat result.csv
+id,name,email,email_verified_at,password,remember_token,created_at,updated_at
+1,foo,bar@example.com,,pass,,,
+5,foo,bartest@example.com,,,,,
 ```
 
 - Querying DB with [aws-vault](https://github.com/99designs/aws-vault) 
