@@ -12,4 +12,4 @@ pip install -r requirements.txt -t .
 zip -r lambda_function.zip  * 
 ```
 
-- then upload `lambda_function` to your AWS lambda 
+- then upload `lambda_function.zip` to your AWS lambda 
