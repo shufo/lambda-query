@@ -17,6 +17,17 @@ An architecture overview
 
 lambda-query invokes lambda function with given query and get response and display result with formatted text
 
+This architecture pros and cons
+
+- Pros
+  - no more bastion server(!)
+    - no requirement for hardening bastion server
+    - you only require manage IAM accounts
+  - no requirement for keeping db connection while operation
+- Cons
+  - setup
+  - no GUI leads some overhead or operation error sometimes
+
 ## Installation
 
 Install client
