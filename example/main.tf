@@ -27,7 +27,7 @@ resource "aws_lambda_function" "query_rds" {
       DB_USER = "username"
       DB_PASS = "database password"
       # SSM_DB_PASS_NAME = aws_ssm_parameter.mysql_master_password.name # you can use SSM parameter as password store
-      ENV = "development"
+      USE_SSM = false
     }
   }
 }

@@ -18,9 +18,9 @@ def get_db_password():
     if db_pass:
         return db_pass
 
-    local = os.getenv('ENV', True)
+    use_ssm = os.getenv('USE_SSM', False)
 
-    if local == True:
+    if use_ssm == False:
         return os.getenv('DB_PASS', 'root')
 
     ssm = boto3.client('ssm')
