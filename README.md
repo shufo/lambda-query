@@ -51,7 +51,7 @@ $ lambda-query -f lambda_query -q "select * from users" --format table
 ## Example
 
 
-- Querying table that has many records (e.g. querying million records) will timeout or occurs error with Lambda limitation (response size is limited to 6MB)
+- Querying table that has many records (e.g. querying million records) 
 
 ```bash
 $ lambda-query -f function_name \
@@ -59,7 +59,7 @@ $ lambda-query -f function_name \
   --limit 10000
 ```
 
-Add `limit` option will limit records per request 
+Add `limit` option will limit records per request (result with many records will timeout or occurs error with Lambda limitation (response size is limited to 6MB))
 
 - Output result to CSV file
 
