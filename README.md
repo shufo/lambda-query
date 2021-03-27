@@ -48,13 +48,34 @@ see terraform resource [example](./example/main.tf) for deployment example.
 
 ## Usage
 
+- Query directly from CLI
+
 ```bash
-$ lambda-query -f lambda_function_name -q "select * from users" --format table
+$ lambda-query -f lambda_function_name -q "select * from users where email = \"bar@example.com\"" --format table
 
 +----+------+---------------------+-------------------+----------+----------------+------------+------------+
 | id | name | email               | email_verified_at | password | remember_token | created_at | updated_at |
 | 1  | foo  | bar@example.com     |                   | pass     |                |            |            |
-| 5  | foo  | bartest@example.com |                   |          |                |            |            |
++----+------+---------------------+-------------------+----------+----------------+------------+------------+
+```
+
+- Query from file
+
+```bash
+$ cat myquery.sql
+SELECT
+  *
+FROM
+  users
+WHERE
+  email = "bar@example.com"
+
+
+$ lambda-query -f lambda_function_name -i myquery.sql --format table
+
++----+------+---------------------+-------------------+----------+----------------+------------+------------+
+| id | name | email               | email_verified_at | password | remember_token | created_at | updated_at |
+| 1  | foo  | bar@example.com     |                   | pass     |                |            |            |
 +----+------+---------------------+-------------------+----------+----------------+------------+------------+
 ```
 
@@ -62,12 +83,13 @@ $ lambda-query -f lambda_function_name -q "select * from users" --format table
 
 |               name |                   description |                 default |
 | -----------------: | ----------------------------: | ----------------------: |
-| `--function`, `-f` |          Lambda function name |                      - |
-|    `--query`, `-q` |                       A query |                      - |
+| `--function`, `-f` |          Lambda function name |                       - |
+|    `--query`, `-q` |                       A query |                       - |
+|    `--input`, `-i` |             A input file name |                       - |
 |    `--limit`, `-l` |      Result limit per request | default: `0` (no limit) |
 |         `--format` |   specify format [table, csv] |          default: `csv` |
 |  `--timeout`, `-t` | max execution time in seconds |           default: `60` |
-|   `--output`, `-o` |              output file path |                      - |
+|   `--output`, `-o` |              output file path |                       - |
 |  `--verbose`, `-v` |             Show verbose logs |        default: `false` |
 
 ## Example
