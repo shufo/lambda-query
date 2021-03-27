@@ -33,15 +33,15 @@ This architecture pros and cons
 Install client
 
 ```bash
-$ go get -u github.com/shufo/lambda-query
+go get -u github.com/shufo/lambda-query
 ```
 
 Upload lambda function to your Lambda
 
 ```bash
-$ cd lambda_function
-$ pip install -r requirements.txt -t .
-$ zip -r lambda_function.zip *
+cd lambda_function
+pip install -r requirements.txt -t .
+zip -r lambda_function.zip *
 ```
 
 see terraform resource [example](./example/main.tf) for deployment example.
@@ -94,8 +94,7 @@ $ lambda-query -f lambda_function_name -i myquery.sql --format table
 
 ## Example
 
-
-- Querying table that has many records (e.g. querying million records) 
+- Querying table that has many records (e.g. querying million records)
 
 ```bash
 $ lambda-query -f function_name \
@@ -120,7 +119,7 @@ id,name,email,email_verified_at,password,remember_token,created_at,updated_at
 5,foo,bartest@example.com,,,,,
 ```
 
-- Querying DB with [aws-vault](https://github.com/99designs/aws-vault) 
+- Querying DB with [aws-vault](https://github.com/99designs/aws-vault)
 
 ```bash
 $ aws-lambda foo exec -- lambda-query -f function_name \
