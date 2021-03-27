@@ -49,7 +49,7 @@ see terraform resource [example](./example/main.tf) for deployment example.
 ## Usage
 
 ```bash
-$ lambda-query -f lambda_function -q "select * from users" --format table
+$ lambda-query -f lambda_function_name -q "select * from users" --format table
 
 +----+------+---------------------+-------------------+----------+----------------+------------+------------+
 | id | name | email               | email_verified_at | password | remember_token | created_at | updated_at |
