@@ -35,9 +35,10 @@ type responseError struct {
 }
 
 type QueryParams struct {
-	Function string
-	Query    string
-	Limit    int64
+	Function  string
+	Query     string
+	Limit     int64
+	InputFile string
 }
 
 type QueryResponse struct {
