@@ -14,7 +14,6 @@ import (
 var Version = "default"
 
 func main() {
-
 	log.SetOutput(os.Stdout)
 	log.SetLevel(log.WarnLevel)
 
@@ -41,13 +40,20 @@ func main() {
 				Value:    "",
 				Aliases:  []string{"q"},
 				Usage:    "query",
-				Required: true,
+				Required: false,
 			},
 			&cli.Int64Flag{
 				Name:     "limit, l",
 				Value:    0,
 				Aliases:  []string{"l"},
 				Usage:    "limit",
+				Required: false,
+			},
+			&cli.StringFlag{
+				Name:     "input file, i",
+				Value:    "",
+				Aliases:  []string{"i", "inputfile"},
+				Usage:    "e.g. lambda-query -i my_query.sql",
 				Required: false,
 			},
 			&cli.StringFlag{
@@ -76,10 +82,36 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
+			if c.String("inputfile") == "" && c.String("query") == "" {
+				log.Fatal("warning: `input file` name or `query` string is needed to run lambda-query")
+			}
+
+			if c.String("inputfile") != "" && c.String("query") != "" {
+				log.Fatal("warning: either `input file` name or `query` string is allowed at once")
+			}
+
+			var query string
+			var inputQuery []byte
+			var err error
+
+			if c.String("inputfile") != "" {
+				inputQuery, err = ioutil.ReadFile(c.String("inputfile"))
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				query = string(inputQuery)
+			}
+
+			if c.String("query") != "" {
+				query = c.String("query")
+			}
+
 			params := QueryParams{
-				Function: c.String("function"),
-				Query:    c.String("query"),
-				Limit:    c.Int64("limit"),
+				Function:  c.String("function"),
+				Query:     query,
+				Limit:     c.Int64("limit"),
+				InputFile: c.String("inputfile"),
 			}
 
 			res := Query(c, params)
