@@ -10,8 +10,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// Version provides ecs-fargate version
-var Version = "default"
+// Version provides lambda-query
+var Version = "0.2.0"
 
 func main() {
 	log.SetOutput(os.Stdout)
